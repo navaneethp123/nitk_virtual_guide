@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './add_event_screen.dart';
 import '../widgets/custom-drawer.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -16,6 +17,13 @@ class _EventsScreenState extends State<EventsScreen> {
       drawer: CustomDrawer(),
       appBar: AppBar(
         title: Text('Events'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AddEventsScreen.routeName),
+          ),
+        ],
       ),
       body: Center(
         child: Text('Events Screen'),
