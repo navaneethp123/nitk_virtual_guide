@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom-text-form-field.dart';
+
 class AddNewsArticleScreen extends StatefulWidget {
   static const String routeName = 'add-news-article-screen';
 
@@ -8,6 +10,31 @@ class AddNewsArticleScreen extends StatefulWidget {
 }
 
 class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
+  final _form = GlobalKey<FormState>();
+
+  String _title;
+  String _author;
+  String _imageUrl;
+  String _content;
+
+  void _validateAndSave(BuildContext context) {
+    if (!_form.currentState.validate()) return;
+    _form.currentState.save();
+
+    // TO-DO: Create an article and update news feed
+    print('Title = $_title');
+    print('Author = $_author');
+    print('Image URL = $_imageUrl');
+    print('Content = $_content');
+
+    Navigator.of(context).pop();
+  }
+
+  String _defaultValidator(String field, String value) {
+    if (value.isEmpty) return '$field cannot be empty';
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +43,48 @@ class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
           'Add News Article',
           style: TextStyle(fontSize: kToolbarHeight * 0.4),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.done),
+            onPressed: () => _validateAndSave(context),
+          ),
+        ],
       ),
-      body: Center(
-        child: Text('Add News Article Screen'),
+      body: Form(
+        key: _form,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  label: 'Title',
+                  onSaved: (newValue) => _title = newValue,
+                  validator: (value) => _defaultValidator('Title', value),
+                ),
+                CustomTextFormField(
+                  label: 'Author',
+                  onSaved: (newValue) => _author = newValue,
+                  validator: (value) => _defaultValidator('Author', value),
+                ),
+                CustomTextFormField(
+                  label: 'Image URL',
+                  onSaved: (newValue) => _imageUrl = newValue,
+                ),
+                CustomTextFormField(
+                  label: 'Content',
+                  onSaved: (newValue) => _content = newValue,
+                  validator: (value) {
+                    if (value.length < 50)
+                      return 'Content of the article should be atleast 50 characters';
+                    return null;
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

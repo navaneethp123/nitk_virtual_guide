@@ -19,7 +19,7 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
   DateTime _dateTime;
   String _location;
 
-  void validateAndSave(BuildContext context) {
+  void _validateAndSave(BuildContext context) {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
 
@@ -33,7 +33,7 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
     Navigator.of(context).pop();
   }
 
-  String defaultValidator(String field, String value) {
+  String _defaultValidator(String field, String value) {
     if (value.isEmpty) return '$field cannot be empty';
     return null;
   }
@@ -49,7 +49,7 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.done),
-            onPressed: () => validateAndSave(context),
+            onPressed: () => _validateAndSave(context),
           ),
         ],
       ),
@@ -64,12 +64,12 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
                 CustomTextFormField(
                   label: 'Title',
                   onSaved: (newValue) => _title = newValue,
-                  validator: (value) => defaultValidator('Title', value),
+                  validator: (value) => _defaultValidator('Title', value),
                 ),
                 CustomTextFormField(
                   label: 'Organizer',
                   onSaved: (newValue) => _organizer = newValue,
-                  validator: (value) => defaultValidator('Organizer', value),
+                  validator: (value) => _defaultValidator('Organizer', value),
                 ),
                 CustomTextFormField(
                   label: 'Description',
@@ -91,7 +91,7 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
                 CustomTextFormField(
                   label: 'Location',
                   onSaved: (newValue) => _location = newValue,
-                  validator: (value) => defaultValidator('Location', value),
+                  validator: (value) => _defaultValidator('Location', value),
                 ),
               ],
             ),

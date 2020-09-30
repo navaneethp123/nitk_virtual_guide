@@ -10,26 +10,31 @@ class DateTimeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(label),
+          Text(
+            label,
+            style: theme.textTheme.subtitle1.copyWith(color: theme.hintColor),
+          ),
           FlatButton(
-            color: hasError ? Colors.red.withOpacity(0.48) : Colors.white,
+            color: Colors.white,
             onPressed: () {
               FocusScope.of(context).unfocus();
               onPressed();
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: BorderSide(color: Colors.black),
+              side: BorderSide(
+                color: hasError ? theme.errorColor : Colors.black,
+              ),
             ),
             child: Text(
               value,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),

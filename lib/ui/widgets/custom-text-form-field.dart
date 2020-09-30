@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         validator: validator,
         onSaved: onSaved,
+        maxLines: null,
         decoration: InputDecoration(
           labelText: label,
           border: _border,

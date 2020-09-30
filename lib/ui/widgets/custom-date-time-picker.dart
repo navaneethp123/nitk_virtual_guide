@@ -25,6 +25,7 @@ class CustomDateTimePicker extends FormField<DateTime> {
             return Padding(
               padding: EdgeInsets.all(5),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DateTimeButton(
                     label: 'Date',
@@ -55,6 +56,17 @@ class CustomDateTimePicker extends FormField<DateTime> {
                       });
                     },
                   ),
+                  if (state.hasError)
+                    Container(
+                      padding: EdgeInsets.only(left: 12),
+                      child: Text(
+                        'Date & Time should be in the future',
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(color: Theme.of(context).errorColor),
+                      ),
+                    ),
                 ],
               ),
             );
