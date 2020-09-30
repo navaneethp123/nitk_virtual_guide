@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/events.dart';
 
 import '../widgets/custom-date-time-picker.dart';
 import '../widgets/custom-text-form-field.dart';
@@ -23,12 +26,13 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
 
-    // TO-DO: Create an event and update list
-    print('Title = $_title');
-    print('Organizer = $_organizer');
-    print('Description = $_description');
-    print('DateTime = ${_dateTime.toIso8601String()}');
-    print('Location = $_location');
+    Provider.of<Events>(context, listen: false).addEvent(Event(
+      title: _title,
+      dateTime: _dateTime,
+      description: _description,
+      location: _location,
+      organizer: _organizer,
+    ));
 
     Navigator.of(context).pop();
   }

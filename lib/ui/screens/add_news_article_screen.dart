@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/news.dart';
 
 import '../widgets/custom-text-form-field.dart';
 
@@ -21,11 +24,12 @@ class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
 
-    // TO-DO: Create an article and update news feed
-    print('Title = $_title');
-    print('Author = $_author');
-    print('Image URL = $_imageUrl');
-    print('Content = $_content');
+    Provider.of<News>(context, listen: false).addArticle(Article(
+      title: _title,
+      author: _author,
+      content: _content,
+      imageUrl: _imageUrl,
+    ));
 
     Navigator.of(context).pop();
   }
