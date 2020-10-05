@@ -17,6 +17,13 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
+  Text getText(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 12),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final events = Provider.of<Events>(context).events;
@@ -42,10 +49,18 @@ class _EventsScreenState extends State<EventsScreen> {
             leading: CircleAvatar(
               child: Text(events[index].organizer[0]),
             ),
-            trailing: Text(DateFormat.MMMd().format(events[index].dateTime)),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                getText(DateFormat.MMMd().format(events[index].dateTime)),
+                getText(DateFormat.jm().format(events[index].dateTime)),
+              ],
+            ),
             onTap: () {
               showModalBottomSheet(
                 context: context,
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
                 builder: (_) => EventDetails(events[index]),
               );
             },

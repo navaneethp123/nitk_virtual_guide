@@ -17,12 +17,26 @@ class InfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      trailing: trailing,
-      leading: leading,
-      title: Text(title),
-      subtitle: Text(subtitle),
-      onTap: onTap,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.black12,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListTile(
+        leading: leading,
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        subtitle: Text(
+          subtitle,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: trailing,
+        onTap: onTap,
+      ),
     );
   }
 }
