@@ -10,6 +10,7 @@ import './ui/screens/article-screen.dart';
 import './ui/screens/events-screen.dart';
 import './ui/screens/news-screen.dart';
 import './ui/screens/mess-screen.dart';
+import './ui/screens/splash-screen.dart';
 import './ui/transitions/custom_page_route.dart';
 import './ui/transitions/display_screen_page_transition_builder.dart';
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
-        home: EventsScreen(),
+        home: SplashScreen(child: EventsScreen()),
         routes: {
           EventsScreen.routeName: (context) => EventsScreen(),
           MessScreen.routeName: (context) => MessScreen(),

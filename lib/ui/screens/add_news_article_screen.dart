@@ -28,7 +28,7 @@ class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
       title: _title,
       author: _author,
       content: _content,
-      imageUrl: _imageUrl,
+      imageUrl: _imageUrl.isEmpty ? null : _imageUrl,
     ));
 
     Navigator.of(context).pop();

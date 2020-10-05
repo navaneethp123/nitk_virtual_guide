@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Event {
@@ -19,37 +20,43 @@ class Event {
 }
 
 class Events with ChangeNotifier {
-  final _events = [];
+  List<Event> _events = [];
 
   Events() {
-    _events.add(Event(
-      id: '1',
-      title: 'tuxcoder',
-      organizer: 'Web Club NITK',
-      description: 'A coding contest',
-      location: 'CCC',
-      dateTime: DateTime.now(),
-    ));
-
-    _events.add(Event(
-      id: '2',
-      title: 'Black & White',
-      organizer: 'Photography Club NITK',
-      description: 'The best photograph contest',
-      location: 'Anywhere',
-      dateTime: DateTime.now(),
-    ));
-
-    notifyListeners();
+    FirebaseFirestore.instance
+        .collection('events')
+        .where('dateTime',
+            isGreaterThanOrEqualTo:
+                DateTime.now().subtract(Duration(hours: 6)).toIso8601String())
+        .snapshots()
+        .listen((eventsSnapshot) {
+      List<Event> events = [];
+      eventsSnapshot.docs.forEach((doc) {
+        var data = doc.data();
+        events.add(Event(
+          id: doc.id,
+          title: data['title'],
+          organizer: data['organizer'],
+          description: data['description'],
+          location: data['location'],
+          dateTime: DateTime.parse(data['dateTime']),
+        ));
+      });
+      _events = events;
+      notifyListeners();
+    });
   }
 
   int get length => _events.length;
   List<Event> get events => [..._events];
 
-  void addEvent(Event event) {
-    event.id = DateTime.now().toIso8601String();
-    _events.add(event);
-
-    notifyListeners();
+  Future<void> addEvent(Event event) async {
+    FirebaseFirestore.instance.collection('events').add({
+      'title': event.title,
+      'organizer': event.organizer,
+      'description': event.description,
+      'location': event.location,
+      'dateTime': event.dateTime.toIso8601String(),
+    });
   }
 }

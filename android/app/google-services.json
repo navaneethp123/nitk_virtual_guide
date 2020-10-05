@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667801321967",
+    "firebase_url": "https://nitk-virtual-guide-b2c82.firebaseio.com",
+    "project_id": "nitk-virtual-guide-b2c82",
+    "storage_bucket": "nitk-virtual-guide-b2c82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667801321967:android:a39f63a263f01438ecf61a",
+        "android_client_info": {
+          "package_name": "com.github.navaneethp123.nitk_virtual_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667801321967-7ugo8mlb6hpa25sg7vp3nvi5jm6vbvja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWhcIBuCCgdcMRgI-3uOh-knsHDQgyrSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667801321967-7ugo8mlb6hpa25sg7vp3nvi5jm6vbvja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
