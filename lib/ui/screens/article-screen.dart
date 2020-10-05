@@ -9,6 +9,7 @@ class ArticleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Article article = ModalRoute.of(context).settings.arguments;
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Align(
@@ -23,11 +24,36 @@ class ArticleScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Text(article.title),
-          Text(article.content),
-        ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                article.title,
+                style: theme.textTheme.headline5
+                    .copyWith(fontFamily: 'SecularOne'),
+              ),
+              Text(
+                ': ${article.author}',
+                style: theme.textTheme.subtitle1.copyWith(
+                  fontFamily: 'SecularOne',
+                  color: Colors.black54,
+                ),
+              ),
+              if (article.imageUrl != null) ...[
+                SizedBox(height: 15),
+                Image.network(article.imageUrl)
+              ],
+              SizedBox(height: 15),
+              Text(
+                article.content,
+                style: theme.textTheme.bodyText1,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -7,7 +7,6 @@ import '../../data/news.dart';
 import './add_news_article_screen.dart';
 import './article-screen.dart';
 import '../widgets/custom-drawer.dart';
-import '../widgets/info-tile.dart';
 
 class NewsScreen extends StatefulWidget {
   static const String routeName = 'news-screen';
@@ -36,15 +35,22 @@ class _NewsScreenState extends State<NewsScreen> {
       body: ListView.builder(
         itemCount: Provider.of<News>(context).length,
         itemBuilder: (context, index) {
-          return InfoTile(
-            title: articles[index].title,
-            subtitle: articles[index].author,
-            leading: CircleAvatar(
-              child: articles[index].imageUrl?.isNotEmpty ?? false
-                  ? Image.network(articles[index].imageUrl)
-                  : Text(articles[index].title[0]),
+          return ListTile(
+            title: Text(
+              articles[index].title,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            trailing: Text(DateFormat.MMMd().format(articles[index].dateTime)),
+            subtitle:
+                Text(DateFormat.yMMMMd().format(articles[index].dateTime)),
+            leading: articles[index].imageUrl == null
+                ? CircleAvatar(
+                    child: Text(articles[index].title[0]),
+                  )
+                : CircleAvatar(
+                    backgroundImage: NetworkImage(articles[index].imageUrl),
+                  ),
             onTap: () => Navigator.of(context).pushNamed(
               ArticleScreen.routeName,
               arguments: articles[index],

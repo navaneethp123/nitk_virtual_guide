@@ -71,6 +71,10 @@ flutter:
           weight: 500
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
+    - family: SecularOne
+      fonts:
+        - asset: assets/fonts/SecularOne-Regular.ttf
+          weight: 400
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
