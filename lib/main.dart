@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './data/events.dart';
+import './data/mess_menu.dart';
 import './data/news.dart';
 
 import './ui/screens/add_event_screen.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<Events>(create: (_) => Events()),
         ChangeNotifierProvider<News>(create: (_) => News()),
+        ChangeNotifierProvider<MessMenu>(create: (_) => MessMenu()),
       ],
       child: MaterialApp(
         theme: ThemeData(
