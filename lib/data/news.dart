@@ -25,6 +25,7 @@ class News with ChangeNotifier {
   News() {
     FirebaseFirestore.instance
         .collection('news')
+        .orderBy('dateTime', descending: true)
         .snapshots()
         .listen((eventsSnapshot) {
       List<Article> articles = [];

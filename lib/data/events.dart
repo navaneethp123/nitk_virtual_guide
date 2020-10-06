@@ -30,6 +30,7 @@ class Events with ChangeNotifier {
         .where('dateTime',
             isGreaterThanOrEqualTo:
                 DateTime.now().subtract(Duration(hours: 6)).toIso8601String())
+        .orderBy('dateTime')
         .snapshots()
         .listen((eventsSnapshot) {
       List<Event> events = [];
