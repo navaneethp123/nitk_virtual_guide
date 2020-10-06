@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/events.dart';
 import './detail-container.dart';
+
+void showDetails({Event event, BuildContext context}) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+    builder: (_) => EventDetails(event),
+  );
+}
 
 class EventDetails extends StatelessWidget {
   final Event event;
@@ -68,7 +79,14 @@ class EventDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    DetailContainer(Text(event.description)),
+                    DetailContainer(
+                      MarkdownBody(
+                        data: event.description,
+                        selectable: true,
+                        shrinkWrap: true,
+                        onTapLink: (url) => launch(url),
+                      ),
+                    ),
                     DetailContainer(
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

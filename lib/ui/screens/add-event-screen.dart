@@ -8,6 +8,7 @@ import '../../data/events.dart';
 
 import '../widgets/custom-date-time-picker.dart';
 import '../widgets/custom-text-form-field.dart';
+import '../widgets/event-details.dart';
 
 class AddEventsScreen extends StatefulWidget {
   static const String routeName = 'add-events-screen';
@@ -41,19 +42,29 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
     Colors.redAccent,
   ];
 
-  void _validateAndSave(BuildContext context) {
-    if (!_form.currentState.validate()) return;
+  Event get _event => Event(
+        title: _title,
+        dateTime: _dateTime,
+        description: _description,
+        location: _location,
+        organizer: _organizer,
+        color: _color,
+      );
+
+  bool _validateAndSave(BuildContext context) {
+    if (!_form.currentState.validate()) return false;
     _form.currentState.save();
+    return true;
+  }
 
-    Provider.of<Events>(context, listen: false).addEvent(Event(
-      title: _title,
-      dateTime: _dateTime,
-      description: _description,
-      location: _location,
-      organizer: _organizer,
-      color: _color,
-    ));
+  void _preview(BuildContext context) {
+    if (!_validateAndSave(context)) return;
+    showDetails(event: _event, context: context);
+  }
 
+  void _addEvent(BuildContext context) {
+    if (!_validateAndSave(context)) return;
+    Provider.of<Events>(context, listen: false).addEvent(_event);
     Navigator.of(context).pop();
   }
 
@@ -118,8 +129,12 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
         ),
         actions: [
           IconButton(
+            icon: Icon(Icons.visibility),
+            onPressed: () => _preview(context),
+          ),
+          IconButton(
             icon: Icon(Icons.done),
-            onPressed: () => _validateAndSave(context),
+            onPressed: () => _addEvent(context),
           ),
         ],
       ),

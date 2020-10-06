@@ -65,14 +65,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 getText(DateFormat.jm().format(event.dateTime)),
               ],
             ),
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (_) => EventDetails(event),
-              );
-            },
+            onTap: () => showDetails(event: event, context: context),
           );
         },
       ),
