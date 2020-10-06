@@ -6,6 +6,7 @@ class InfoTile extends StatelessWidget {
   final Widget leading;
   final Widget trailing;
   final Function onTap;
+  final Color color;
 
   InfoTile({
     this.title,
@@ -13,6 +14,7 @@ class InfoTile extends StatelessWidget {
     this.leading,
     this.trailing,
     this.onTap,
+    this.color,
   });
 
   @override
@@ -20,7 +22,7 @@ class InfoTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
-        color: Colors.black12,
+        color: color,
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(

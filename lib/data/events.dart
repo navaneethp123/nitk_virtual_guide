@@ -8,6 +8,7 @@ class Event {
   String description;
   String location;
   DateTime dateTime;
+  Color color;
 
   Event({
     this.id,
@@ -16,6 +17,7 @@ class Event {
     this.description,
     this.location,
     this.dateTime,
+    this.color,
   });
 }
 
@@ -40,6 +42,7 @@ class Events with ChangeNotifier {
           description: data['description'],
           location: data['location'],
           dateTime: DateTime.parse(data['dateTime']),
+          color: Color(data['color'] ?? 4288585374),
         ));
       });
       _events = events;
@@ -57,6 +60,7 @@ class Events with ChangeNotifier {
       'description': event.description,
       'location': event.location,
       'dateTime': event.dateTime.toIso8601String(),
+      'color': event.color.value,
     });
   }
 }

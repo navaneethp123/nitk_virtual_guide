@@ -30,7 +30,14 @@ class EventDetails extends StatelessWidget {
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),
         ),
-        color: Colors.white,
+        gradient: LinearGradient(
+          colors: [
+            Color.alphaBlend(event.color.withOpacity(0.3), Colors.white),
+            Color.alphaBlend(event.color.withOpacity(0.45), Colors.white),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(

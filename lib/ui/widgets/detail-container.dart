@@ -4,7 +4,7 @@ class DetailContainer extends Container {
   DetailContainer(Widget widget, {String heading = ''})
       : super(
           decoration: BoxDecoration(
-            color: Colors.black12,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(5),
           ),
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),

@@ -43,17 +43,26 @@ class _EventsScreenState extends State<EventsScreen> {
       body: ListView.builder(
         itemCount: Provider.of<Events>(context).length,
         itemBuilder: (context, index) {
+          final event = events[index];
           return InfoTile(
-            title: events[index].title,
-            subtitle: events[index].location,
+            color: event.color.withOpacity(0.25),
+            title: event.title,
+            subtitle: event.location,
             leading: CircleAvatar(
-              child: Text(events[index].organizer[0]),
+              child: Text(
+                event.organizer[0],
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(fontFamily: 'SecularOne', color: Colors.white),
+              ),
+              backgroundColor: event.color,
             ),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                getText(DateFormat.MMMd().format(events[index].dateTime)),
-                getText(DateFormat.jm().format(events[index].dateTime)),
+                getText(DateFormat.MMMd().format(event.dateTime)),
+                getText(DateFormat.jm().format(event.dateTime)),
               ],
             ),
             onTap: () {
@@ -61,7 +70,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 context: context,
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
-                builder: (_) => EventDetails(events[index]),
+                builder: (_) => EventDetails(event),
               );
             },
           );
