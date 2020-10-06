@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/news.dart';
 
-import './add_news_article_screen.dart';
+import 'add-news-article-screen.dart';
 import './article-screen.dart';
 import '../widgets/custom-drawer.dart';
 

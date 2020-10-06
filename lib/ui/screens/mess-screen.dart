@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/mess_menu.dart';
+import '../../data/mess-menu.dart';
 import '../widgets/custom-drawer.dart';
 
 class MessScreen extends StatefulWidget {

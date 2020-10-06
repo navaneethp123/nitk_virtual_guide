@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './data/events.dart';
-import './data/mess_menu.dart';
+import 'data/mess-menu.dart';
 import './data/news.dart';
 
-import './ui/screens/add_event_screen.dart';
-import './ui/screens/add_news_article_screen.dart';
+import 'ui/screens/add-event-screen.dart';
+import 'ui/screens/add-news-article-screen.dart';
 import './ui/screens/article-screen.dart';
 import './ui/screens/events-screen.dart';
 import './ui/screens/news-screen.dart';
 import './ui/screens/mess-screen.dart';
 import './ui/screens/splash-screen.dart';
-import './ui/transitions/custom_page_route.dart';
-import './ui/transitions/display_screen_page_transition_builder.dart';
+import 'ui/transitions/custom-page-route.dart';
+import 'ui/transitions/display-screen-page-transition-builder.dart';
 
 main() => runApp(MyApp());
 

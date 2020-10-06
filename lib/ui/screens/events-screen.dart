@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/events.dart';
 
-import './add_event_screen.dart';
+import 'add-event-screen.dart';
 import '../widgets/custom-drawer.dart';
 import '../widgets/event-details.dart';
 import '../widgets/info-tile.dart';
