@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/news.dart';
 
@@ -47,9 +49,10 @@ class ArticleScreen extends StatelessWidget {
                 Image.network(article.imageUrl)
               ],
               SizedBox(height: 15),
-              Text(
-                article.content,
-                style: theme.textTheme.bodyText1,
+              MarkdownBody(
+                data: article.content,
+                onTapLink: (url) => launch(url),
+                selectable: true,
               ),
             ],
           ),

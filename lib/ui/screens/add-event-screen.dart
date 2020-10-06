@@ -51,19 +51,19 @@ class _AddEventsScreenState extends State<AddEventsScreen> {
         color: _color,
       );
 
-  bool _validateAndSave(BuildContext context) {
+  bool get _validateAndSave {
     if (!_form.currentState.validate()) return false;
     _form.currentState.save();
     return true;
   }
 
   void _preview(BuildContext context) {
-    if (!_validateAndSave(context)) return;
+    if (!_validateAndSave) return;
     showDetails(event: _event, context: context);
   }
 
   void _addEvent(BuildContext context) {
-    if (!_validateAndSave(context)) return;
+    if (!_validateAndSave) return;
     Provider.of<Events>(context, listen: false).addEvent(_event);
     Navigator.of(context).pop();
   }

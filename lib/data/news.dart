@@ -48,7 +48,6 @@ class News with ChangeNotifier {
   List<Article> get articles => [..._articles];
 
   void addArticle(Article article) {
-    article.dateTime = DateTime.now();
     FirebaseFirestore.instance.collection('news').add({
       'title': article.title,
       'author': article.author,

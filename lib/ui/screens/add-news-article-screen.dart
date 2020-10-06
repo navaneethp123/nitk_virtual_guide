@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nitk_virtual_guide/ui/screens/article-screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/news.dart';
@@ -20,17 +21,30 @@ class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
   String _imageUrl;
   String _content;
 
-  void _validateAndSave(BuildContext context) {
-    if (!_form.currentState.validate()) return;
+  Article get _article => Article(
+        title: _title,
+        author: _author,
+        content: _content,
+        imageUrl: _imageUrl.isEmpty ? null : _imageUrl,
+        dateTime: DateTime.now(),
+      );
+
+  bool get _validateAndSave {
+    if (!_form.currentState.validate()) return false;
     _form.currentState.save();
+    return true;
+  }
 
-    Provider.of<News>(context, listen: false).addArticle(Article(
-      title: _title,
-      author: _author,
-      content: _content,
-      imageUrl: _imageUrl.isEmpty ? null : _imageUrl,
-    ));
+  void _preview(BuildContext context) {
+    if (!_validateAndSave) return;
+    Navigator.of(context)
+        .pushNamed(ArticleScreen.routeName, arguments: _article);
+  }
 
+  void _addArticle(BuildContext context) {
+    if (!_validateAndSave) return;
+
+    Provider.of<News>(context, listen: false).addArticle(_article);
     Navigator.of(context).pop();
   }
 
@@ -49,8 +63,12 @@ class _AddNewsArticleScreenState extends State<AddNewsArticleScreen> {
         ),
         actions: [
           IconButton(
+            icon: Icon(Icons.visibility),
+            onPressed: () => _preview(context),
+          ),
+          IconButton(
             icon: Icon(Icons.done),
-            onPressed: () => _validateAndSave(context),
+            onPressed: () => _addArticle(context),
           ),
         ],
       ),
